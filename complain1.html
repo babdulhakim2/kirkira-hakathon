@@ -1,0 +1,109 @@
+
+<html>
+<head>
+<title>Complain</title>
+<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBdTpUEy-G2wvWjeVizf1D08-Sb2XoOTmQ",
+    authDomain: "quickresponse-kirkira.firebaseapp.com",
+    databaseURL: "https://quickresponse-kirkira.firebaseio.com",
+    projectId: "quickresponse-kirkira",
+    storageBucket: "quickresponse-kirkira.appspot.com",
+    messagingSenderId: "572366397621"
+  };
+  firebase.initializeApp(config);
+
+
+// // erData(1, "khadijah", "khadijah@kirkira.com", "");
+// // console.log(database);
+// database.child("Complains").set({"name":"khadijah", "age":21, "complain":"Hello world"});
+
+
+// var result = firebase.database().ref().child('Complains')
+// // console.log(result)
+// result.on("value", snap => console.log(snap.val()))
+
+var send = document.getElementById('send');
+
+function Send() {
+	// body...
+	var name = document.getElementById('name').value;
+	var status = document.getElementById('status').value;
+	var complain = document.getElementById('complain').value;
+
+	//   // Get a reference to the database service
+	var database = firebase.database().ref();
+
+var dbRef = database.child("Complain").set({"name":name, "status":status, "complain":complain});
+
+// console.log(dbRef);
+
+}
+
+$(document).ready(function(){
+	var result = firebase.database().ref().child('Complain')
+	var table = $("#myData");
+// console.log(result)
+var data;
+result.on("value", function(snap){
+	// console.log(snap.val().name)
+	table.append("<tr>\
+		<td>"+snap.val().name+"</td>\
+		<td>"+snap.val().status+"</td>\
+		<td>"+snap.val().complain+"</td>\
+		</tr>")
+});
+
+// console.log(data.complain)
+})
+
+
+</script>
+</head>
+
+
+<body bgcolor="green">
+
+		
+<h1 style="color:#FFFFFF"><b>USER COMPLAIN PAGE</h1></p>
+<hr>
+
+
+<label>Name</label>
+<input type="text" id="name" placeholder="Name">
+
+
+<label> What is your HIV Status?  </label> </br>
+<select id="status" >
+
+									<option>Select</option>
+									<option>Early Stage</option>
+									<option>Level</option>
+									
+
+
+</select> <br>
+
+<label> Please state your full complain here </label> <br>
+<textarea cols="30" rows="20" id="complain"> </textarea> <br>
+<button onclick="Send()">Send</button>
+<hr>
+<br/>
+<table id="myData" border="1" cellpadding="10">
+	<thead>
+		<td>Name</td>
+		<td>Status</td>
+		<td>Complain</td>
+	</thead>
+
+</table>
+
+   <p>Designed Kirkira Innovation Hub</p>
+
+
+
+</body>
+</html>

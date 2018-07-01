@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quick Response</title>
+	<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBdTpUEy-G2wvWjeVizf1D08-Sb2XoOTmQ",
+    authDomain: "quickresponse-kirkira.firebaseapp.com",
+    databaseURL: "https://quickresponse-kirkira.firebaseio.com",
+    projectId: "quickresponse-kirkira",
+    storageBucket: "quickresponse-kirkira.appspot.com",
+    messagingSenderId: "572366397621"
+  };
+  firebase.initializeApp(config);
+
+  // Get a reference to the database service
+	var database = firebase.database().ref();
+// erData(1, "khadijah", "khadijah@kirkira.com", "");
+// console.log(database);
+database.child("Complains").set({"name":"khadijah", "age":21, "complain":"Hello world"});
+
+
+var result = firebase.database().ref().child('Complains')
+// console.log(result)
+result.on("value", snap => console.log(snap.val()))
+
+</script>
+</head>
+<body>
+
+</body>
+</html>
